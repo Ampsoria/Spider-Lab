@@ -790,10 +790,11 @@ export default function GadgetScene(props: Props) {
         }
         if (keyboardOrbitPending && !interacting) {
           cameraOrbit.setFromVector3(orbitOffset.copy(camera.position).sub(controls.target));
-          cameraOrbit.theta = T.MathUtils.lerp(cameraOrbit.theta, keyboardOrbit.theta, smoothing);
+          const thetaDifference = T.MathUtils.euclideanModulo(keyboardOrbit.theta - cameraOrbit.theta + Math.PI, Math.PI * 2) - Math.PI;
+          cameraOrbit.theta += thetaDifference * smoothing;
           cameraOrbit.phi = T.MathUtils.lerp(cameraOrbit.phi, keyboardOrbit.phi, smoothing);
           camera.position.copy(orbitOffset.setFromSpherical(cameraOrbit).add(controls.target));
-          if (Math.abs(cameraOrbit.theta - keyboardOrbit.theta) + Math.abs(cameraOrbit.phi - keyboardOrbit.phi) < 0.002) {
+          if (Math.abs(thetaDifference) * (1 - smoothing) + Math.abs(cameraOrbit.phi - keyboardOrbit.phi) < 0.002) {
             keyboardOrbitPending = false;
           }
         }
