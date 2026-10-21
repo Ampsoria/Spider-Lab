@@ -6,15 +6,24 @@
     "node": ">=22.13.0"
   },
   "scripts": {
-    "dev": "WRANGLER_LOG_PATH=.wrangler/wrangler.log vinext dev",
-    "build": "WRANGLER_LOG_PATH=.wrangler/wrangler.log vinext build",
-    "start": "WRANGLER_LOG_PATH=.wrangler/wrangler.log vinext start",
-    "test": "npm run build && node --test tests/rendered-html.test.mjs",
+    "dev": "vite --config vite.static.config.ts",
+    "build": "vite build --config vite.static.config.ts",
+    "start": "vite preview --config vite.static.config.ts",
+    "test": "npm run build && node --test tests/static-build.test.mjs",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
     "db:generate": "drizzle-kit generate",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "dev:static": "vite --config vite.static.config.ts",
+    "build:static": "vite build --config vite.static.config.ts",
+    "preview:static": "vite preview --config vite.static.config.ts",
+    "preview": "vite preview --config vite.static.config.ts",
+    "dev:sites": "WRANGLER_LOG_PATH=.wrangler/wrangler.log vinext dev",
+    "build:sites": "WRANGLER_LOG_PATH=.wrangler/wrangler.log vinext build",
+    "start:sites": "WRANGLER_LOG_PATH=.wrangler/wrangler.log vinext start",
+    "test:sites": "npm run build:sites && node --test tests/rendered-html.test.mjs"
   },
   "dependencies": {
+    "@fontsource/noto-sans-thai": "^5.3.0",
     "drizzle-orm": "0.45.2",
     "lucide-react": "^1.42.0",
     "react": "19.2.6",

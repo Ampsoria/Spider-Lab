@@ -7,9 +7,9 @@ import "./tracker.css";
 type TrackerSimulatorProps = { onClose: () => void };
 
 const beacons = [
-  { id: "ST-01", name: "ควีนส์", zone: "QUEENS OUTPOST", x: 74, y: 64, signal: 91, distance: 1.4, sector: "Q-07" },
-  { id: "ST-02", name: "มิดทาวน์", zone: "MIDTOWN ROOFTOP", x: 43, y: 37, signal: 84, distance: 3.2, sector: "M-12" },
-  { id: "ST-03", name: "บรูคลิน", zone: "BROOKLYN BRIDGE", x: 44, y: 77, signal: 78, distance: 4.8, sector: "B-04" },
+  { id: "จุด-01", name: "ควีนส์", zone: "ฐานสังเกตการณ์ควีนส์", x: 74, y: 64, signal: 91, distance: 1.4, sector: "ค-07" },
+  { id: "จุด-02", name: "มิดทาวน์", zone: "ดาดฟ้ามิดทาวน์", x: 43, y: 37, signal: 84, distance: 3.2, sector: "ม-12" },
+  { id: "จุด-03", name: "บรูคลิน", zone: "สะพานบรูคลิน", x: 44, y: 77, signal: 78, distance: 4.8, sector: "บ-04" },
 ];
 
 const offsets = [
@@ -71,15 +71,15 @@ export default function TrackerSimulator({ onClose }: TrackerSimulatorProps) {
       <div className="tracker-panel">
         <header className="tracker-header">
           <div>
-            <span className="tracker-eyebrow"><Radio size={12} aria-hidden="true" /> STARK TECH / FIELD EQUIPMENT</span>
-            <h2 id="tracker-title">SPIDER<span>—</span>TRACKER</h2>
+            <span className="tracker-eyebrow"><Radio size={12} aria-hidden="true" /> เทคโนโลยีสตาร์ก / อุปกรณ์ภาคสนาม</span>
+            <h2 id="tracker-title">สไปเดอร์<span>—</span>แทร็กเกอร์</h2>
           </div>
           <button className="tracker-close" onClick={() => dialogRef.current?.close()} aria-label="ปิดระบบติดตาม"><X size={21} /></button>
         </header>
 
         <div className="tracker-simulation-bar">
-          <span><i /> SIMULATION / พื้นที่จำลอง</span>
-          <span className="tracker-protocol">PROTOCOL 03.17</span>
+          <span><i /> ระบบจำลอง / พื้นที่สมมติ</span>
+          <span className="tracker-protocol">ระบบรุ่น 03.17</span>
         </div>
 
         <div className="tracker-body">
@@ -91,11 +91,11 @@ export default function TrackerSimulator({ onClose }: TrackerSimulatorProps) {
             <div className="tracker-map-bridge tracker-map-bridge-two" aria-hidden="true" />
             <div className="tracker-radar-rings" aria-hidden="true" />
             <div className="tracker-radar-sweep" aria-hidden="true" />
-            <span className="tracker-map-label tracker-label-midtown" aria-hidden="true">MIDTOWN</span>
-            <span className="tracker-map-label tracker-label-queens" aria-hidden="true">QUEENS</span>
-            <span className="tracker-map-label tracker-label-water" aria-hidden="true">EAST RIVER</span>
-            <span className="tracker-map-north" aria-hidden="true">N <ArrowUpRight size={15} /></span>
-            <div className="tracker-map-coordinates" aria-hidden="true">SECTOR MAP<br /><span>NYC / FICTIONAL GRID</span></div>
+            <span className="tracker-map-label tracker-label-midtown" aria-hidden="true">มิดทาวน์</span>
+            <span className="tracker-map-label tracker-label-queens" aria-hidden="true">ควีนส์</span>
+            <span className="tracker-map-label tracker-label-water" aria-hidden="true">แม่น้ำอีสต์</span>
+            <span className="tracker-map-north" aria-hidden="true">เหนือ <ArrowUpRight size={15} /></span>
+            <div className="tracker-map-coordinates" aria-hidden="true">แผนที่เขต<br /><span>นิวยอร์ก / พิกัดสมมติ</span></div>
             {beacons.map((beacon, index) => {
               const markerOffset = offsets[scanCounts[index] % offsets.length];
               return (
@@ -113,11 +113,11 @@ export default function TrackerSimulator({ onClose }: TrackerSimulatorProps) {
                 </button>
               );
             })}
-            <div className="tracker-map-bottom"><span><i /> {scanning ? "SCANNING GRID" : "SIMULATED SIGNALS"}</span><span>3 BEACONS</span></div>
+            <div className="tracker-map-bottom"><span><i /> {scanning ? "กำลังสแกนพื้นที่" : "สัญญาณจำลอง"}</span><span>เครื่องติดตาม 3 จุด</span></div>
           </div>
 
           <section className="tracker-controls" aria-label="ควบคุมเครื่องติดตาม">
-            <div className="tracker-section-caption"><span>SELECT A BEACON</span><span>01 — 03</span></div>
+            <div className="tracker-section-caption"><span>เลือกเครื่องติดตาม</span><span>01 — 03</span></div>
             <div className="tracker-beacon-list">
               {beacons.map((beacon, index) => (
                 <button key={beacon.id} className={`tracker-target ${index === activeIndex ? "is-selected" : ""}`} onClick={() => selectBeacon(index)} aria-pressed={index === activeIndex}>
@@ -132,10 +132,10 @@ export default function TrackerSimulator({ onClose }: TrackerSimulatorProps) {
               <div className="tracker-readout-status"><span className={scanning ? "tracker-status-scanning" : ""}><i /> {scanning ? "กำลังสแกนพื้นที่จำลอง" : scanCount > 0 ? "อัปเดตตำแหน่งจำลองแล้ว" : "พร้อมจำลองการติดตาม"}</span><span>{active.id}</span></div>
               <div className="tracker-metrics">
                 <div><span>สัญญาณจำลอง</span><strong>{active.signal + offset.signal}<small>%</small></strong></div>
-                <div><span>ระยะทางจำลอง</span><strong>{(active.distance + offset.distance).toFixed(1)}<small>km</small></strong></div>
+                <div><span>ระยะทางจำลอง</span><strong>{(active.distance + offset.distance).toFixed(1)}<small>กม.</small></strong></div>
               </div>
               <div className="tracker-signal-meter" aria-hidden="true"><span style={{ width: `${active.signal + offset.signal}%` }} /></div>
-              <div className="tracker-readout-footer"><span>GRID {active.sector}</span><span>SCAN {String(scanCount).padStart(2, "0")}</span></div>
+              <div className="tracker-readout-footer"><span>เขต {active.sector}</span><span>สแกนครั้งที่ {String(scanCount).padStart(2, "0")}</span></div>
             </div>
 
             <button className="tracker-scan-button" onClick={scan} disabled={scanning}>
@@ -143,11 +143,11 @@ export default function TrackerSimulator({ onClose }: TrackerSimulatorProps) {
               {scanning ? "กำลังสแกน…" : "สแกนสัญญาณ"}
               <ArrowUpRight size={17} aria-hidden="true" />
             </button>
-            <p id="tracker-description" className="tracker-disclaimer">เลือกจุดแล้วสแกนเพื่อทดลองติดตามบนแผนที่สมมติ<br />ใช้ข้อมูลจำลอง ไม่เชื่อมต่อ GPS หรือตำแหน่งจริง</p>
+            <p id="tracker-description" className="tracker-disclaimer">เลือกจุดแล้วสแกนเพื่อทดลองติดตามบนแผนที่สมมติ<br />ใช้ข้อมูลจำลอง ไม่เชื่อมต่อ จีพีเอส หรือตำแหน่งจริง</p>
           </section>
         </div>
 
-        <footer className="tracker-footer"><span>FRIENDLY NEIGHBORHOOD TECHNOLOGY</span><span>SPIDER ARCHIVE / EXPERIMENT 003</span></footer>
+        <footer className="tracker-footer"><span>เทคโนโลยีของฮีโร่เพื่อนบ้าน</span><span>คลังสไปเดอร์ / การทดลอง 003</span></footer>
       </div>
     </dialog>
   );

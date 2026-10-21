@@ -23,13 +23,13 @@ type Props = {
 };
 
 const names: Record<ModelKind, string> = {
-  tracker: "Spider Tracker",
-  shooter: "Web Shooter",
-  mask: "Spider Mask",
-  camera: "Field Camera",
-  cartridge: "Web Fluid Cartridge",
-  web: "Organic Web",
-  drone: "Spider Drone",
+  tracker: "เครื่องติดตามแมงมุม",
+  shooter: "เครื่องยิงใย",
+  mask: "หน้ากากสไปเดอร์แมน",
+  camera: "กล้องของปีเตอร์",
+  cartridge: "ตลับใยแมงมุม",
+  web: "ใยชีวภาพ",
+  drone: "โดรนแมงมุม",
 };
 
 /** All geometry is generated locally: the exhibit needs no models or image requests. */
@@ -269,7 +269,7 @@ export default function GadgetScene(props: Props) {
         ctx.lineWidth = 2;
         ctx.strokeRect(10, 10, 492, 108);
         ctx.fillStyle = "#ced4d8";
-        ctx.font = "500 38px monospace";
+        ctx.font = "500 38px Noto Sans Thai, sans-serif";
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
         ctx.fillText(text, 256, 65);
@@ -396,7 +396,7 @@ export default function GadgetScene(props: Props) {
         box(deck, blackSteel, [1.08, 0.16, 1.53], [0, 0, 0]);
         const cover = part(deck, [0, 0.15, 0.04], [0, 0.55, 0.16]);
         ball(cover, red, [0, 0, 0], [0.5, 0.22, 0.69]);
-        label(cover, "WS / 02", 0.51, 0.14, [0, 0.213, 0.22]);
+        label(cover, "ใย / 02", 0.51, 0.14, [0, 0.213, 0.22]);
         for (const side of [-1, 1]) {
           rod(deck, steel, [side * 0.42, 0.14, -0.56], [side * 0.42, 0.14, 0.54], 0.048);
           for (const z of [-0.6, 0.6]) screw(deck, side * 0.43, 0.095, z);
@@ -495,7 +495,7 @@ export default function GadgetScene(props: Props) {
         const badge = spiderEmblem(body, 0.37, red);
         badge.rotation.x = Math.PI / 2;
         badge.position.set(-0.81, 0.17, 0.435);
-        label(body, "DAILY BUGLE", 0.65, 0.16, [-0.49, 0.725, 0]);
+        label(body, "เดลีบิวเกิล", 0.65, 0.16, [-0.49, 0.725, 0]);
         model.scale.setScalar(1.25);
       }
 
@@ -533,7 +533,7 @@ export default function GadgetScene(props: Props) {
         if (!formula) {
           const holder = part(model, [0, -0.47, -0.2], [0, -0.1, -0.65]);
           box(holder, dark, [2.55, 0.44, 0.51], [0, 0, 0]);
-          label(holder, "PARKER / SYNTHETIC", 1.4, 0.19, [0, 0.226, 0]);
+          label(holder, "ปาร์กเกอร์ / ใยสังเคราะห์", 1.4, 0.19, [0, 0.226, 0]);
         }
         model.scale.setScalar(formula ? 1.9 : 1.25);
       }
@@ -862,7 +862,7 @@ export default function GadgetScene(props: Props) {
             <div style={{ position: "absolute", width: 16, height: 16, top: 29, left: 32, borderRadius: "50%", background: "#ffd2d8", boxShadow: "0 0 20px #ff3657" }} />
           </div>
           <strong style={{ fontFamily: "monospace", fontSize: 14, letterSpacing: ".12em", textTransform: "uppercase" }}>{names[props.kind]}</strong>
-          <span style={{ maxWidth: 260, fontSize: 12, lineHeight: 1.7, color: "#92959f" }}>3D preview is unavailable on this device. You can still explore all specifications below.</span>
+          <span style={{ maxWidth: 260, fontSize: 12, lineHeight: 1.7, color: "#92959f" }}>อุปกรณ์นี้ไม่รองรับภาพสามมิติ คุณยังสำรวจข้อมูลอุปกรณ์ด้านล่างได้</span>
         </div>
       )}
     </div>

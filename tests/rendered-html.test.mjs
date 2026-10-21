@@ -16,11 +16,11 @@ test("renders the complete archive on the server without requiring WebGL", async
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
   const html = await response.text();
   assert.match(html, /<html[^>]*lang="th"/);
-  assert.match(html, /<title>SPIDER LAB/);
-  for (const actor of ["Tobey Maguire", "Andrew Garfield", "Tom Holland"]) {
+  assert.match(html, /<title>ห้องแล็บแมงมุม/);
+  for (const actor of ["โทบีย์ แมไกวร์", "แอนดรูว์ การ์ฟิลด์", "ทอม ฮอลแลนด์"]) {
     assert.ok(html.includes(actor), `Missing collection: ${actor}`);
   }
-  assert.ok(html.includes("SPIDER-TRACKER"));
+  assert.ok(html.includes("เครื่องติดตามแมงมุม"));
   assert.match(html, /id="lab"/);
   assert.match(html, /id="archive"/);
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton|Your site is taking shape/);
