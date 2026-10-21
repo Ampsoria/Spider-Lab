@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useLanguage, type Translate } from "../i18n/LanguageProvider";
 import type * as Three from "three";
 
 export type ModelKind =
@@ -22,18 +23,20 @@ type Props = {
   onReady?: () => void;
 };
 
-const names: Record<ModelKind, string> = {
-  tracker: "เครื่องติดตามแมงมุม",
-  shooter: "เครื่องยิงใย",
-  mask: "หน้ากากสไปเดอร์แมน",
-  camera: "กล้องของปีเตอร์",
-  cartridge: "ตลับใยแมงมุม",
-  web: "ใยชีวภาพ",
-  drone: "โดรนแมงมุม",
-};
+const getNames = (t: Translate): Record<ModelKind, string> => ({
+  tracker: t("เครื่องติดตามแมงมุม"),
+  shooter: t("เครื่องยิงใย"),
+  mask: t("หน้ากากสไปเดอร์แมน"),
+  camera: t("กล้องของปีเตอร์"),
+  cartridge: t("ตลับใยแมงมุม"),
+  web: t("ใยชีวภาพ"),
+  drone: t("โดรนแมงมุม"),
+});
 
 /** All geometry is generated locally: the exhibit needs no models or image requests. */
 export default function GadgetScene(props: Props) {
+  const { t } = useLanguage();
+  const names = getNames(t);
   const hostRef = useRef<HTMLDivElement>(null);
   const current = useRef(props);
   const [fallback, setFallback] = useState(false);
@@ -396,7 +399,7 @@ export default function GadgetScene(props: Props) {
         box(deck, blackSteel, [1.08, 0.16, 1.53], [0, 0, 0]);
         const cover = part(deck, [0, 0.15, 0.04], [0, 0.55, 0.16]);
         ball(cover, red, [0, 0, 0], [0.5, 0.22, 0.69]);
-        label(cover, "ใย / 02", 0.51, 0.14, [0, 0.213, 0.22]);
+        label(cover, "WEB / 02", 0.51, 0.14, [0, 0.213, 0.22]);
         for (const side of [-1, 1]) {
           rod(deck, steel, [side * 0.42, 0.14, -0.56], [side * 0.42, 0.14, 0.54], 0.048);
           for (const z of [-0.6, 0.6]) screw(deck, side * 0.43, 0.095, z);
@@ -495,7 +498,7 @@ export default function GadgetScene(props: Props) {
         const badge = spiderEmblem(body, 0.37, red);
         badge.rotation.x = Math.PI / 2;
         badge.position.set(-0.81, 0.17, 0.435);
-        label(body, "เดลีบิวเกิล", 0.65, 0.16, [-0.49, 0.725, 0]);
+        label(body, "DAILY BUGLE", 0.65, 0.16, [-0.49, 0.725, 0]);
         model.scale.setScalar(1.25);
       }
 
@@ -533,7 +536,7 @@ export default function GadgetScene(props: Props) {
         if (!formula) {
           const holder = part(model, [0, -0.47, -0.2], [0, -0.1, -0.65]);
           box(holder, dark, [2.55, 0.44, 0.51], [0, 0, 0]);
-          label(holder, "ปาร์กเกอร์ / ใยสังเคราะห์", 1.4, 0.19, [0, 0.226, 0]);
+          label(holder, "PARKER / SYNTHETIC WEB", 1.4, 0.19, [0, 0.226, 0]);
         }
         model.scale.setScalar(formula ? 1.9 : 1.25);
       }
@@ -843,7 +846,7 @@ export default function GadgetScene(props: Props) {
       ref={hostRef}
       role={fallback ? "img" : "application"}
       tabIndex={fallback ? -1 : 0}
-      aria-label={fallback ? `${names[props.kind]}. 3D preview unavailable on this device.` : `โมเดล 3D ${names[props.kind]} ใช้ปุ่มลูกศรเพื่อหมุน หรือใช้เมาส์ลาก เลื่อนหรือจีบนิ้วเพื่อซูม ปุ่มซูมและรีเซ็ตอยู่ถัดจากโมเดล`}
+      aria-label={fallback ? `${names[props.kind]}. ${t("อุปกรณ์นี้ไม่รองรับภาพสามมิติ คุณยังสำรวจข้อมูลอุปกรณ์ด้านล่างได้")}` : `${t("โมเดล 3D ")}${names[props.kind]}${t(" ใช้ปุ่มลูกศรเพื่อหมุน หรือใช้เมาส์ลาก เลื่อนหรือจีบนิ้วเพื่อซูม ปุ่มซูมและรีเซ็ตอยู่ถัดจากโมเดล")}`}
       onFocus={() => setFocused(true)}
       onBlur={() => setFocused(false)}
       style={{ width: "100%", height: "100%", position: "relative", cursor: fallback ? "default" : "grab", outline: focused ? "2px solid #f13946" : "none", outlineOffset: -8 }}
@@ -861,8 +864,8 @@ export default function GadgetScene(props: Props) {
             <div style={{ position: "absolute", width: 3, height: 100, top: 4, left: 39, background: "#260a12", borderRadius: 3 }} />
             <div style={{ position: "absolute", width: 16, height: 16, top: 29, left: 32, borderRadius: "50%", background: "#ffd2d8", boxShadow: "0 0 20px #ff3657" }} />
           </div>
-          <strong style={{ fontFamily: "monospace", fontSize: 14, letterSpacing: ".12em", textTransform: "uppercase" }}>{names[props.kind]}</strong>
-          <span style={{ maxWidth: 260, fontSize: 12, lineHeight: 1.7, color: "#92959f" }}>อุปกรณ์นี้ไม่รองรับภาพสามมิติ คุณยังสำรวจข้อมูลอุปกรณ์ด้านล่างได้</span>
+          <strong style={{ fontFamily: "inherit", fontSize: 14, letterSpacing: "0", textTransform: "uppercase" }}>{names[props.kind]}</strong>
+          <span style={{ maxWidth: 260, fontSize: 12, lineHeight: 1.7, color: "#92959f" }}>{t("อุปกรณ์นี้ไม่รองรับภาพสามมิติ คุณยังสำรวจข้อมูลอุปกรณ์ด้านล่างได้")}</span>
         </div>
       )}
     </div>

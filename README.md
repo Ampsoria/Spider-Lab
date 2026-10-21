@@ -2,6 +2,8 @@
 
 ![Spider Lab — Parker's Invention Archive](docs/assets/spider-lab-banner.svg)
 
+**ภาษาไทย** · [English](README.en.md)
+
 # 🕷️ SPIDER LAB · ห้องแล็บแมงมุม
 
 **เบื้องหลังหน้ากาก คือความคิดที่ไม่ธรรมดา**
@@ -16,11 +18,13 @@
 ![Three.js](https://img.shields.io/badge/Three.js-111318?style=flat-square&logo=threedotjs&logoColor=white)
 ![Vite](https://img.shields.io/badge/Vite-111318?style=flat-square&logo=vite&logoColor=BD34FE)
 
-[สำรวจคลัง](#-the-archive) · [เปิดเล่นในเครื่อง](#-quick-start) · [เผยแพร่เว็บ](#-deploy) · [เครดิต](#-credits)
+[สำรวจคลัง](#archive) · [เปิดเล่นในเครื่อง](#quick-start) · [เผยแพร่เว็บ](#deploy) · [เครดิต](#credits)
 
 </div>
 
 ---
+
+<a id="archive"></a>
 
 ## 🕸️ THE ARCHIVE
 
@@ -39,12 +43,17 @@
 | 📡 **Spider Tracker** | เลือกเป้าหมายสมมติ 3 รายการ แล้วทดลองสแกนสัญญาณ |
 | 🎬 **Immersive Mode** | เปิดมุมมองเต็มจอ พร้อมเสียงเอฟเฟกต์ที่เปิดเองได้ |
 | 📱 **Friendly Neighborhood UI** | รองรับมือถือ การลดภาพเคลื่อนไหว และหน้าสำรองเมื่อ WebGL ใช้งานไม่ได้ |
+| 🌐 **TH / EN** | สลับไทย–อังกฤษได้จากแถบด้านบน พร้อมจำภาษาที่เลือก |
 
 > **แล็บพร้อมใช้:** เว็บหลักเป็น Static ไม่ต้องมีฐานข้อมูล บัญชีผู้ใช้ หรือ API key
 
 ---
 
-## ⚡ QUICK START
+<a id="quick-start"></a>
+
+## ⚡ เปิดแล็บในเครื่อง
+
+หน้าเว็บใช้ฟอนต์ **Kanit** ที่เก็บไว้ในโปรเจกต์ ไม่ต้องโหลดจาก Google Fonts และสลับภาษาได้ด้วยปุ่ม **TH / EN** สามารถแชร์ลิงก์ภาษาอังกฤษด้วย `?lang=en` ได้
 
 ใช้ Node.js **22.13 ขึ้นไป** แนะนำ Node.js 22 ตามไฟล์ `.nvmrc`
 
@@ -57,7 +66,7 @@ npm run dev
 
 หากใช้ nvm ให้รัน `nvm use` ก่อนติดตั้ง dependencies
 
-## 🧪 LAB CHECKS
+## 🧪 ตรวจความพร้อม
 
 ```bash
 npm run lint
@@ -66,11 +75,13 @@ npm test
 npm run preview
 ```
 
-`npm test` สร้าง production build ใน `dist-static/` และตรวจว่า HTML, JavaScript, CSS และ favicon มีอยู่จริง พร้อมใช้ asset URL ที่รองรับ subpath ของ GitHub Pages การทดสอบนี้ไม่ได้ตรวจภาพ WebGL หรือทุกปฏิสัมพันธ์ในเบราว์เซอร์
+`npm test` สร้าง production build ใน `dist-static/` และตรวจคำแปลภาษาอังกฤษ รวมถึงตรวจว่า HTML, JavaScript, CSS และ favicon มีอยู่จริง พร้อมใช้ asset URL ที่รองรับ subpath ของ GitHub Pages การทดสอบนี้ไม่ได้ตรวจภาพ WebGL หรือทุกปฏิสัมพันธ์ในเบราว์เซอร์
 
 `npm run preview` เปิดดู production build ปกติที่ `http://localhost:4173` ต้อง build ก่อน สามารถใช้ `npm run build` เพื่อ build อย่างเดียว หรือ `npm start` เพื่อ preview ได้เช่นกัน
 
-## 🚀 DEPLOY
+<a id="deploy"></a>
+
+## 🚀 เผยแพร่เว็บ
 
 1. สร้าง repository บน GitHub แล้ว push โค้ดทั้งหมดที่ต้องการแชร์ โดยใช้ branch `main` (ไม่ต้องอัปโหลด `node_modules/` หรือ `dist-static/`)
 2. ไปที่ **Settings → Pages → Build and deployment → Source** เลือก **GitHub Actions**
@@ -93,7 +104,7 @@ Asset URLs เป็น relative จึงรองรับทั้ง GitHub 
 
 คำสั่ง `dev:static`, `build:static` และ `preview:static` ยังใช้ได้สำหรับผู้ที่เคยใช้เวอร์ชันก่อนหน้า
 
-## 🗂️ BLUEPRINT
+## 🗂️ แผนผังโปรเจกต์
 
 | ไฟล์ | หน้าที่ |
 | --- | --- |
@@ -103,6 +114,8 @@ Asset URLs เป็น relative จึงรองรับทั้ง GitHub 
 | `app/globals.css` | ธีมและหน้าจอมือถือ |
 | `app/components/GadgetScene.tsx` | โมเดล Three.js และกล้อง |
 | `app/components/TrackerSimulator.tsx` | เครื่องติดตามจำลอง |
+| `app/i18n/LanguageProvider.tsx` | การเลือกภาษา การจำค่า และ metadata ตามภาษา |
+| `app/i18n/en.json` | คำแปลภาษาอังกฤษ |
 | `vite.static.config.ts` | config หลักสำหรับ local และ Static deployment |
 | `.github/workflows/pages.yml` | ตรวจโปรเจกต์และ deploy GitHub Pages |
 
@@ -127,12 +140,16 @@ npm run start:sites
 
 ---
 
-## ❤️ CREDITS
+<a id="credits"></a>
+
+## ❤️ ผู้สร้างและเครดิต
 
 ออกแบบและพัฒนาโดย **[Ampsoria](https://github.com/Ampsoria)** — สร้างขึ้นด้วยความชอบในโลกของ Spider-Man และสิ่งประดิษฐ์ของ Peter Parker
 
 
 โมเดลที่แสดงในฉากสร้างจาก geometry ในโค้ด เป็นงานตีความที่ได้แรงบันดาลใจจากภาพยนตร์ ไม่ใช่ไฟล์หรือแบบกลไกทางการ ใยของ Tobey เป็นพลังชีวภาพ ส่วนอุปกรณ์ของ Tom บางรายการพัฒนาโดย Tony Stark ระบบ Tracker ใช้ข้อมูลสมมติ ไม่มี GPS หรือการติดตามบุคคลจริง
+
+ฟอนต์ **Kanit** โดย Kanit Project Authors ใช้ผ่าน Fontsource ภายใต้ SIL Open Font License
 
 Spider-Man และตัวละครเป็นของ Marvel / Sony Pictures เว็บนี้เป็นแฟนโปรเจกต์อิสระสำหรับศึกษาและทดลอง ไม่มีความเกี่ยวข้องอย่างเป็นทางการกับเจ้าของผลงาน
 

@@ -18,3 +18,18 @@ test("production entry has Thai metadata and deployable assets under a repositor
     assert.ok((await stat(new URL(asset, output))).size > 0, `Empty asset: ${asset}`);
   }
 });
+
+test("self-hosted font files referenced by production CSS are present", async () => {
+  const html = await readFile(new URL("index.html", output), "utf8");
+  const styles = [...html.matchAll(/href="([^"]+\.css)"/g)];
+  let fonts = 0;
+  for (const [, path] of styles) {
+    const stylesheet = new URL(path, output);
+    const css = await readFile(stylesheet, "utf8");
+    for (const [, asset] of css.matchAll(/url\(["']?([^\s)"']+\.woff2?)["']?\)/g)) {
+      assert.ok((await stat(new URL(asset, stylesheet))).size > 0, `Missing font: ${asset}`);
+      fonts++;
+    }
+  }
+  assert.ok(fonts > 0, "Expected bundled Kanit fonts");
+});
