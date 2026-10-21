@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="380" viewBox="0 0 1200 380" role="img" aria-labelledby="title desc">
+  <title id="title">SPIDER LAB — The Invention Archive</title>
+  <desc id="desc">A red and black Spider-Man inspired banner with a web pattern, spider emblem, and three cinematic eras.</desc>
+  <defs>
+    <linearGradient id="bg" x2="1" y2="1"><stop stop-color="#181a22"/><stop offset="1" stop-color="#08090d"/></linearGradient>
+    <radialGradient id="glow"><stop stop-color="#e32942" stop-opacity=".25"/><stop offset="1" stop-color="#e32942" stop-opacity="0"/></radialGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#fff" stroke-opacity=".035"/></pattern>
+  </defs>
+  <rect width="1200" height="380" rx="20" fill="url(#bg)"/>
+  <rect width="1200" height="380" rx="20" fill="url(#grid)"/>
+  <ellipse cx="1000" cy="190" rx="350" ry="290" fill="url(#glow)"/>
+  <g fill="none" stroke="#e32942" stroke-opacity=".22" transform="translate(1010 180)">
+    <path d="M-330 0H330M0-330V330M-240-240 240 240M-240 240 240-240M-305-125 305 125M-125-305 125 305M-305 125 305-125M-125 305 125-305"/>
+    <path d="M0-70 27-64 49-49 64-27 70 0 64 27 49 49 27 64 0 70-27 64-49 49-64 27-70 0-64-27-49-49-27-64Z M0-130 50-120 92-92 120-50 130 0 120 50 92 92 50 120 0 130-50 120-92 92-120 50-130 0-120-50-92-92-50-120Z M0-200 77-185 141-141 185-77 200 0 185 77 141 141 77 185 0 200-77 185-141 141-185 77-200 0-185-77-141-141-77-185Z M0-280 107-259 198-198 259-107 280 0 259 107 198 198 107 259 0 280-107 259-198 198-259 107-280 0-259-107-198-198-107-259Z"/>
+  </g>
+  <rect x="58" y="52" width="28" height="4" fill="#ee354b"/>
+  <g font-family="Arial, Helvetica, sans-serif">
+    <text x="100" y="59" font-size="12" letter-spacing="4" fill="#b8bbc8">PARKER'S INVENTION ARCHIVE</text>
+    <text x="54" y="173" font-size="92" font-weight="900" letter-spacing="-4" fill="#f4f4f6">SPIDER<tspan fill="#ee354b"> LAB</tspan></text>
+    <text x="60" y="214" font-size="15" letter-spacing="5" fill="#b8bbc8">GREAT POWER. GREATER IDEAS.</text>
+    <g font-size="12" letter-spacing="2" fill="#f4f4f6">
+      <rect x="60" y="260" width="122" height="34" rx="4" fill="#e32942"/><text x="77" y="282">3 HEROES</text>
+      <rect x="194" y="260" width="142" height="34" rx="4" fill="#181a22" stroke="#46424e"/><text x="211" y="282">9 EXHIBITS</text>
+      <rect x="348" y="260" width="155" height="34" rx="4" fill="#181a22" stroke="#46424e"/><text x="365" y="282">ONE LEGACY</text>
+    </g>
+    <text x="60" y="339" font-size="11" letter-spacing="3" fill="#7f8294">AN INTERACTIVE FAN PROJECT BY AMPSORIA</text>
+  </g>
+  <g transform="translate(1010 180)" stroke="#ee354b" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <path d="M-10-15-38-34-52-77M10-15 38-34 52-77M-13-5-54-14-81-46M13-5 54-14 81-46M-13 9-53 29-70 65M13 9 53 29 70 65M-9 22-30 56-34 94M9 22 30 56 34 94"/>
+    <ellipse cy="10" rx="15" ry="30" fill="#ee354b" stroke="none"/><ellipse cy="-24" rx="11" ry="13" fill="#ee354b" stroke="none"/>
+  </g>
+  <path d="M20 378H1180" stroke="#ee354b" stroke-width="4"/>
+</svg>
