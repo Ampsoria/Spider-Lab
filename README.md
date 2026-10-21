@@ -10,7 +10,10 @@
 
 สำรวจสิ่งประดิษฐ์ของ Spider-Man ทั้ง 3 ยุค ผ่านโลกสามมิติที่คุณควบคุมได้
 
-[![เปิดเล่น Spider Lab](https://img.shields.io/badge/🕷️_เปิดเล่นเลย-SPIDER_LAB-E32942?style=for-the-badge&labelColor=111318)](https://ampsoria.github.io/Spider-Lab/)
+<a href="https://ampsoria.github.io/Spider-Lab/?lang=th">
+  <img src="docs/assets/play-th.svg" width="760" alt="เปิดเล่น Spider Lab เลย" />
+</a>
+
 [![ผู้สร้าง Ampsoria](https://img.shields.io/badge/สร้างโดย-Ampsoria-E32942?style=for-the-badge&labelColor=111318&logo=github&logoColor=white)](https://github.com/Ampsoria)
 
 ![React](https://img.shields.io/badge/React_19-111318?style=flat-square&logo=react&logoColor=61DAFB)
